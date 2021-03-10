@@ -10,34 +10,33 @@
         "Other"
     ],
     "activationEvents": [
-        "onView:hlen",
-        "onView:hlen-curreny",
-        "onView:hlen-review"
+        "onView:beici-curreny",
+        "onView:beici-review"
     ],
     "main": "./extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "hlen-curreny.worldCount",
+                "command": "beici-curreny.worldCount",
                 "title": "完成度"
             },
             {
-                "command": "hlen-review.worldCount",
+                "command": "beici-review.worldCount",
                 "title": "复习进度"
             },
             {
-                "command": "hlen-curreny.complete",
+                "command": "beici-curreny.complete",
                 "title": "完成"
             }
         ],
         "views": {
-            "hlen-explorer": [
+            "beici-explorer": [
                 {
-                    "id": "hlen-curreny",
+                    "id": "beici-curreny",
                     "name": "单词列表"
                 },
                 {
-                    "id": "hlen-review",
+                    "id": "beici-review",
                     "name": "复习"
                 }
             ]
@@ -45,20 +44,20 @@
         "menus": {
             "view/title": [
                 {
-                    "command": "hlen-curreny.worldCount",
-                    "when": "view == hlen-curreny",
+                    "command": "beici-curreny.worldCount",
+                    "when": "view == beici-curreny",
                     "group": "navigation"
                 },
                 {
-                    "command": "hlen-review.worldCount",
-                    "when": "view == hlen-review",
+                    "command": "beici-review.worldCount",
+                    "when": "view == beici-review",
                     "group": "navigation"
                 }
             ],
             "view/item/context": [
                 {
-                    "command": "hlen-curreny.complete",
-                    "when": "view == hlen-curreny",
+                    "command": "beici-curreny.complete",
+                    "when": "view == beici-curreny",
                     "group": "inline"
                 }
             ]
@@ -66,7 +65,7 @@
         "viewsContainers": {
             "activitybar": [
                 {
-                    "id": "hlen-explorer",
+                    "id": "beici-explorer",
                     "title": "Hello English",
                     "icon": "resources/light/refresh.svg"
                 }
@@ -74,11 +73,11 @@
         },
         "viewsWelcome": [
             {
-                "view": "hlen-curreny",
+                "view": "beici-curreny",
                 "contents": "No node dependencies found [learn more](https://www.npmjs.com/).\n[Add Dependency](command:nodeDependencies.addEntry)"
             },
             {
-                "view": "hlen-review",
+                "view": "beici-review",
                 "contents": "No node dependencies found [learn more](https://www.npmjs.com/).\n[Add Dependency](command:nodeDependencies.addEntry)"
             }
         ]

@@ -13,11 +13,11 @@ console.log('context: ', context);
     const nodeDependenciesProvider = new NodeDependenciesProvider(vscode.workspace.rootPath);
 
     //注册菜单展开时事件
-    registerTreeDataProvider('hlen-curreny', nodeDependenciesProvider);
-    registerTreeDataProvider('hlen-review', nodeDependenciesProvider);
+    registerTreeDataProvider('beici-curreny', nodeDependenciesProvider);
+    registerTreeDataProvider('beici-review', nodeDependenciesProvider);
 
     //注册菜单中项目的点击事件
-    registerCommand('hlen-curreny.worldCount', () =>
+    registerCommand('beici-curreny.worldCount', () =>
         nodeDependenciesProvider.refresh()
     );
 
