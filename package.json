@@ -1,0 +1,102 @@
+{
+    "name": "y",
+    "displayName": "ese",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.54.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onView:hlen",
+        "onView:hlen-curreny",
+        "onView:hlen-review"
+    ],
+    "main": "./extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "hlen-curreny.worldCount",
+                "title": "完成度"
+            },
+            {
+                "command": "hlen-review.worldCount",
+                "title": "复习进度"
+            },
+            {
+                "command": "hlen-curreny.complete",
+                "title": "完成"
+            }
+        ],
+        "views": {
+            "hlen-explorer": [
+                {
+                    "id": "hlen-curreny",
+                    "name": "单词列表"
+                },
+                {
+                    "id": "hlen-review",
+                    "name": "复习"
+                }
+            ]
+        },
+        "menus": {
+            "view/title": [
+                {
+                    "command": "hlen-curreny.worldCount",
+                    "when": "view == hlen-curreny",
+                    "group": "navigation"
+                },
+                {
+                    "command": "hlen-review.worldCount",
+                    "when": "view == hlen-review",
+                    "group": "navigation"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "hlen-curreny.complete",
+                    "when": "view == hlen-curreny",
+                    "group": "inline"
+                }
+            ]
+        },
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "hlen-explorer",
+                    "title": "Hello English",
+                    "icon": "resources/light/refresh.svg"
+                }
+            ]
+        },
+        "viewsWelcome": [
+            {
+                "view": "hlen-curreny",
+                "contents": "No node dependencies found [learn more](https://www.npmjs.com/).\n[Add Dependency](command:nodeDependencies.addEntry)"
+            },
+            {
+                "view": "hlen-review",
+                "contents": "No node dependencies found [learn more](https://www.npmjs.com/).\n[Add Dependency](command:nodeDependencies.addEntry)"
+            }
+        ]
+    },
+    "scripts": {
+        "lint": "eslint .",
+        "pretest": "npm run lint",
+        "test": "node ./test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.54.0",
+        "@types/glob": "^7.1.3",
+        "@types/mocha": "^8.0.4",
+        "@types/node": "^12.11.7",
+        "eslint": "^7.19.0",
+        "glob": "^7.1.6",
+        "mocha": "^8.2.1",
+        "typescript": "^4.1.3",
+        "vscode-test": "^1.5.0"
+    }
+}
