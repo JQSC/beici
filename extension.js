@@ -1,16 +1,13 @@
 const vscode = require('vscode');
 
-const NodeDependenciesProvider = require('./src/TreeDataProvider');
+const WorldProvider = require('./src/TreeDataProvider/TreeDataProvider');
 
 function activate(context) {
-console.log('context: ', context);
 
     const { registerTreeDataProvider } = vscode.window;
     const { registerCommand } = vscode.commands;
 
-    
-
-    const nodeDependenciesProvider = new NodeDependenciesProvider(vscode.workspace.rootPath);
+    const nodeDependenciesProvider = new WorldProvider(vscode.workspace.rootPath);
 
     //注册菜单展开时事件
     registerTreeDataProvider('beici-curreny', nodeDependenciesProvider);
@@ -20,11 +17,6 @@ console.log('context: ', context);
     registerCommand('beici-curreny.worldCount', () =>
         nodeDependenciesProvider.refresh()
     );
-
-
-
-
-
 
 }
 

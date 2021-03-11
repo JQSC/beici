@@ -26,7 +26,8 @@
             },
             {
                 "command": "beici-curreny.complete",
-                "title": "完成"
+                "title": "完成",
+                "icon":"resources/media/ok.svg"
             }
         ],
         "views": {
@@ -67,7 +68,7 @@
                 {
                     "id": "beici-explorer",
                     "title": "Hello English",
-                    "icon": "resources/light/refresh.svg"
+                    "icon": "resources/english.svg"
                 }
             ]
         },
