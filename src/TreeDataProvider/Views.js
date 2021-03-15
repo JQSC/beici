@@ -1,14 +1,27 @@
 const vscode = require('vscode');
 const CET4_T = require('../assets/CET4_T.json')
-
+const { update, get } = require('./storage');
+const { CURRENT_VIEW, REVIEW } = require('../constants/viewConstants');
 
 class View {
 
-    constructor(context) {
-        this.context = context;
+    constructor(content, viewType) {
         this.changeTreeDataEmitter = new vscode.EventEmitter();
         this.onDidChangeTreeData = this.changeTreeDataEmitter.event;
-        this.treeData = CET4_T.map((item) => new WorldItem(item));
+        this.treeData = this.getTreeDataByStorage(content, viewType);
+    }
+
+    getTreeDataByStorage(content, viewType) {
+        const data = get(content);
+        const pass = viewType === REVIEW ? true : false;
+        const list = [];
+
+        for (let item of data) {
+            if (pass == !!item.pass) {
+                list.push(new WorldItem(item))
+            }
+        }
+        return list
     }
 
     //处理每一项元素

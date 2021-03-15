@@ -2,41 +2,47 @@ const fs = require('fs');
 const path = require('path');
 const CET4_T = require('../assets/CET4_T.json')
 
-//const dbFile = path.join(__dirname, '..', '..', '..', 'huile8-mastered-list.txt');
-
 const directoryName = 'globalStorage';
+const fileName = 'CET4_T.json';
 
-function updateWorldList(context, world, pass) {
+function update(context, world, pass) {
 
     const globalStoragePathArr = context.globalStoragePath.split(directoryName);
-    const storageDirectory = path.join(globalStoragePathArr[0], directoryName, 'CET4_T.json');
-
-    const json = readFile(storageDirectory);
-
+    const storageDirectory = path.join(globalStoragePathArr[0], directoryName, fileName);
     const { trans, ukphone, usphone, name } = world;
 
-    json.forEach((item)=>{
+    let json = readFile(storageDirectory);
 
+    json.map((item) => {
+        if (item.name === name) {
+            item.date = new Date().getTime();
+            item.pass = pass;
+        }
+        return item;
     })
 
-    console.log('world', world, pass)
-    if (pass) {
-
-    }
-
-
-
-    const data = [{ "title": "111" }];
-    fs.writeFileSync(storageDirectory, JSON.stringify(data));
-
+    fs.writeFileSync(storageDirectory, JSON.stringify(json));
 }
 
 function readFile(path) {
+
     if (fs.existsSync(path)) {
-        return fs.readFileSync(path);
+        return JSON.parse(fs.readFileSync(path, { encoding: 'utf-8' }));
     } else {
         return CET4_T;
     }
 }
 
-module.exports = updateWorldList
+
+function get(context) {
+    const globalStoragePathArr = context.globalStoragePath.split(directoryName);
+    const storageDirectory = path.join(globalStoragePathArr[0], directoryName, fileName);
+
+    return readFile(storageDirectory);
+}
+
+
+module.exports = {
+    update,
+    get
+}
