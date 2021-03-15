@@ -10,6 +10,9 @@
         "Other"
     ],
     "activationEvents": [
+        "onCommand:beici-curreny.refresh",
+        "onCommand:beici-curreny.complete",
+        "onCommand:beici-review.back",
         "onView:beici-curreny",
         "onView:beici-review"
     ],
@@ -17,17 +20,19 @@
     "contributes": {
         "commands": [
             {
-                "command": "beici-curreny.worldCount",
-                "title": "完成度"
-            },
-            {
-                "command": "beici-review.worldCount",
-                "title": "复习进度"
+                "command": "beici-curreny.refresh",
+                "title": "刷新",
+                "icon":"resources/dark/refresh.svg"
             },
             {
                 "command": "beici-curreny.complete",
-                "title": "完成",
+                "title": "加入复习列表",
                 "icon":"resources/media/ok.svg"
+            },
+            {
+                "command": "beici-review.back",
+                "title": "返回学习列表",
+                "icon":"resources/dark/back.svg"
             }
         ],
         "views": {
@@ -45,20 +50,21 @@
         "menus": {
             "view/title": [
                 {
-                    "command": "beici-curreny.worldCount",
+                    "command": "beici-curreny.refresh",
                     "when": "view == beici-curreny",
                     "group": "navigation"
-                },
-                {
-                    "command": "beici-review.worldCount",
-                    "when": "view == beici-review",
-                    "group": "navigation"
+                    
                 }
             ],
             "view/item/context": [
                 {
                     "command": "beici-curreny.complete",
                     "when": "view == beici-curreny",
+                    "group": "inline"
+                },
+                {
+                    "command": "beici-review.back",
+                    "when": "view == beici-review",
                     "group": "inline"
                 }
             ]
