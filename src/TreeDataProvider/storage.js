@@ -9,14 +9,12 @@ function update(context, world, pass) {
 
     const globalStoragePathArr = context.globalStoragePath.split(directoryName);
     const storageDirectory = path.join(globalStoragePathArr[0], directoryName, fileName);
-    const { trans, ukphone, usphone, name } = world;
 
     let json = readFile(storageDirectory);
 
     json.map((item) => {
-        if (item.name === name) {
-            item.date = new Date().getTime();
-            item.pass = pass;
+        if (item.name === world.name) {
+            item = world
         }
         return item;
     })

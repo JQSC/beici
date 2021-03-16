@@ -1,6 +1,6 @@
 const vscode = require('vscode');
-
 const TreeDataProvider = require('./src/TreeDataProvider/ViewsContainers');
+const { CURRENT_VIEW, REVIEW, COMPLETED_VIEW, FAVORITE_VIEW } = require('./src/constants/viewConstants');
 
 function activate(context) {
 
@@ -10,20 +10,24 @@ function activate(context) {
     const ViewsContainers = new TreeDataProvider(context);
 
     //注册菜单展开时事件
-    registerTreeDataProvider('beici-curreny', ViewsContainers.currentTreeData);
-    registerTreeDataProvider('beici-review', ViewsContainers.reviewTreeData);
+    registerTreeDataProvider('beici-curreny', ViewsContainers.current);
+    registerTreeDataProvider('beici-review', ViewsContainers.review);
+    registerTreeDataProvider('beici-completed', ViewsContainers.completed);
+    registerTreeDataProvider('beici-favorite', ViewsContainers.favorite);
 
-    //注册菜单中项目的点击事件
-    registerCommand('beici-curreny.refresh', (treeItem) =>
-        ViewsContainers.refresh(treeItem)
+    //标记加入已学列表
+    registerCommand('beici.markReview', (treeItem) =>
+        ViewsContainers.addMark(treeItem, REVIEW)
     )
 
-    registerCommand('beici-curreny.complete', (treeItem) =>
-        ViewsContainers.complete(treeItem)
+    //标记加入已斩列表
+    registerCommand('beici.markCompleted', (treeItem) =>
+        ViewsContainers.addMark(treeItem, COMPLETED_VIEW)
     )
 
-    registerCommand('beici-review.back', (treeItem) =>
-        ViewsContainers.back(treeItem)
+    //标记加入收藏
+    registerCommand('beici.markFavorite', (treeItem) =>
+        ViewsContainers.back(treeItem, FAVORITE_VIEW)
     )
 
 

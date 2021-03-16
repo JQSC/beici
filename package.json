@@ -10,62 +10,91 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:beici-curreny.refresh",
-        "onCommand:beici-curreny.complete",
-        "onCommand:beici-review.back",
+        "onCommand:beici.markFavorite",
+        "onCommand:beici.markReview",
+        "onCommand:beici.markCompleted",
+        "onCommand:beici.sort",
         "onView:beici-curreny",
-        "onView:beici-review"
+        "onView:beici-review",
+        "onView:beici-completed",
+        "onView:beici-favorite"
     ],
     "main": "./extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "beici-curreny.refresh",
-                "title": "刷新",
-                "icon":"resources/dark/refresh.svg"
+                "command": "beici.sort",
+                "title": "时间倒序"
             },
             {
-                "command": "beici-curreny.complete",
-                "title": "加入复习列表",
-                "icon":"resources/media/ok.svg"
+                "command": "beici.markReview",
+                "title": "已学",
+                "icon": {
+                    "light": "resources/light/add.svg",
+                    "dark": "resources/dark/add.svg"
+                }
             },
             {
-                "command": "beici-review.back",
-                "title": "返回学习列表",
-                "icon":"resources/dark/back.svg"
+                "command": "beici.markFavorite",
+                "title": "收藏",
+                "icon": {
+                    "light": "resources/light/like.svg",
+                    "dark": "resources/dark/like.svg"
+                }
+            },
+            {
+                "command": "beici.markCompleted",
+                "title": "斩",
+                "icon": {
+                    "light": "resources/light/ok.svg",
+                    "dark": "resources/dark/ok.svg"
+                }
             }
         ],
+        "menus": {
+            "view/title": [
+                {
+                    "command": "beici.sort",
+                    "when": "view == beici-review",
+                    "group": "inline"
+                }
+            ],
+            "view/item/context": [
+              
+                {
+                    "command": "beici.markFavorite",
+                    "when": "view =~ /beici-curreny|beici-review|beici-completed/ && viewItem == world",
+                    "group": "inline"
+                },
+                {
+                    "command": "beici.markReview",
+                    "when": "view =~ /beici-curreny/ && viewItem == world",
+                    "group": "inline"
+                },
+                {
+                    "command": "beici.markCompleted",
+                    "when": "view =~ /beici-curreny|beici-review/ && viewItem == world",
+                    "group": "inline"
+                }
+            ]
+        },
         "views": {
             "beici-explorer": [
                 {
                     "id": "beici-curreny",
-                    "name": "单词列表"
+                    "name": "未学单词"
                 },
                 {
                     "id": "beici-review",
-                    "name": "复习"
-                }
-            ]
-        },
-        "menus": {
-            "view/title": [
-                {
-                    "command": "beici-curreny.refresh",
-                    "when": "view == beici-curreny",
-                    "group": "navigation"
-                    
-                }
-            ],
-            "view/item/context": [
-                {
-                    "command": "beici-curreny.complete",
-                    "when": "view == beici-curreny",
-                    "group": "inline"
+                    "name": "已学单词"
                 },
                 {
-                    "command": "beici-review.back",
-                    "when": "view == beici-review",
-                    "group": "inline"
+                    "id": "beici-completed",
+                    "name": "已斩单词"
+                },
+                {
+                    "id": "beici-favorite",
+                    "name": "收藏"
                 }
             ]
         },

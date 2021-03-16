@@ -1,10 +1,13 @@
-const CURRENT_VIEW='CURRENT_VIEW';
-const REVIEW='REVIEW';
+const CURRENT_VIEW = 'CURRENT_VIEW';
+const REVIEW = 'REVIEW';
+const COMPLETED_VIEW = 'COMPLETED_VIEW';
+const FAVORITE_VIEW = 'FAVORITE_VIEW';
 
 
 
-
-module.exports ={
+module.exports = {
     CURRENT_VIEW,
-    REVIEW
+    REVIEW,
+    FAVORITE_VIEW,
+    COMPLETED_VIEW
 }

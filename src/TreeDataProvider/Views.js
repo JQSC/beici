@@ -1,57 +1,85 @@
 const vscode = require('vscode');
-const CET4_T = require('../assets/CET4_T.json')
 const { update, get } = require('./storage');
 const { CURRENT_VIEW, REVIEW } = require('../constants/viewConstants');
+const path = require('path');
+const addSvg = path.join(__dirname, '..', '..', 'resources', 'dark', 'add.svg');
 
 class View {
 
-    constructor(content, viewType) {
+    constructor(treeData, options) {
         this.changeTreeDataEmitter = new vscode.EventEmitter();
         this.onDidChangeTreeData = this.changeTreeDataEmitter.event;
-        this.treeData = this.getTreeDataByStorage(content, viewType);
+        //options 规则
+        this.options = options;
+        this.treeData = this.setTreeDataByOptions(treeData)
+
     }
 
-    getTreeDataByStorage(content, viewType) {
-        const data = get(content);
-        const pass = viewType === REVIEW ? true : false;
-        const list = [];
+    setTreeDataByOptions(data) {
+        const { filter, group } = this.options || {};
+        const treeData = data.filter((item) => item[filter]);
+        let list = [];
 
-        for (let item of data) {
-            if (pass == !!item.pass) {
-                list.push(new WorldItem(item))
+        if (group) {
+            const map = {};
+            for (let item of treeData) {
+                const key = getDate(item[group]);
+                if (map[key]) {
+                    map[key].push(item)
+                } else {
+                    map[key] = [item]
+                }
             }
+
+            for (let key in map) {
+                list.push({ name: key, children: map[key] })
+            }
+        } else {
+            list = treeData;
         }
         return list
     }
 
-    //处理每一项元素
+    //获取元素内容
     getTreeItem(element) {
-        return element
+        if (element.children) {
+            return new WordGroup(element);
+        } else {
+            return new WorldItem(element);
+        }
     }
 
+    // 获取子节点
     getChildren(element) {
         if (!element) {
             return this.treeData;
         } else {
-            return Promise.resolve([]);
+            return element.children;
         }
     }
 
-    refresh() {
+    refresh(data) {
+        this.treeData = this.setTreeDataByOptions(data)
         this.changeTreeDataEmitter.fire(undefined);
     }
 
     push(treeItem) {
-        this.treeData.push(treeItem)
+        const key = getDate(new Date());
+        const lastItem = this.treeData[this.treeData.length - 1];
+        if (lastItem.name == key) {
+            lastItem.children.push(treeItem)
+        } else {
+            this.treeData.push({
+                name: key,
+                children: [treeItem]
+            })
+        }
         this.refresh();
     }
 
     remove(treeItem) {
         this.treeData = this.treeData.filter(item => {
-            if (treeItem.label == item.label) {
-                console.log(123)
-            }
-            return treeItem.label != item.label
+            return treeItem.name != item.name
         });
         this.refresh();
     }
@@ -60,12 +88,10 @@ class View {
 class WorldItem extends vscode.TreeItem {
     constructor(world) {
         const { name, trans, usphone, ukphone } = world;
+        //'[斩] '
         super(name);
-        this.name = name;
-        this.trans = trans;
-        this.usphone = usphone;
-        this.ukphone = ukphone;
-
+        // this.iconPath = addSvg
+        this.contextValue = 'world';
         this.description = transString(trans);
         this.tooltip = [
             `${name}`,
@@ -76,6 +102,23 @@ class WorldItem extends vscode.TreeItem {
     }
 }
 
+
+class WordGroup extends vscode.TreeItem {
+    constructor(element) {
+        super(element.name);
+        this.description = `共${element.children.length}个`;
+        this.collapsibleState = vscode.TreeItemCollapsibleState.Expanded;
+    };
+}
+
+
+function getDate(timestamp) {
+    let date = new Date(timestamp);
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    return year + '-' + month + '-' + day;
+}
 
 function transString(trans) {
     let res = '';
