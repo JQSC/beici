@@ -1,7 +1,8 @@
 {
     "name": "y",
-    "displayName": "ese",
-    "description": "",
+    "publisher":"csq",
+    "displayName": "Beici",
+    "description": "摸鱼背单词工具，仿vscode文件列表，让你毫无顾忌，放肆的记单词!",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.54.0"
@@ -10,9 +11,9 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:beici.markFavorite",
         "onCommand:beici.markReview",
         "onCommand:beici.markCompleted",
+        "onCommand:beici.markFavorite",
         "onCommand:beici.sort",
         "onView:beici-curreny",
         "onView:beici-review",
@@ -60,12 +61,6 @@
                 }
             ],
             "view/item/context": [
-              
-                {
-                    "command": "beici.markFavorite",
-                    "when": "view =~ /beici-curreny|beici-review|beici-completed/ && viewItem == world",
-                    "group": "inline"
-                },
                 {
                     "command": "beici.markReview",
                     "when": "view =~ /beici-curreny/ && viewItem == world",
@@ -74,6 +69,11 @@
                 {
                     "command": "beici.markCompleted",
                     "when": "view =~ /beici-curreny|beici-review/ && viewItem == world",
+                    "group": "inline"
+                },
+                {
+                    "command": "beici.markFavorite",
+                    "when": "view =~ /beici-curreny|beici-review|beici-completed/ && viewItem == world",
                     "group": "inline"
                 }
             ]
@@ -110,11 +110,7 @@
         "viewsWelcome": [
             {
                 "view": "beici-curreny",
-                "contents": "No node dependencies found [learn more](https://www.npmjs.com/).\n[Add Dependency](command:nodeDependencies.addEntry)"
-            },
-            {
-                "view": "beici-review",
-                "contents": "No node dependencies found [learn more](https://www.npmjs.com/).\n[Add Dependency](command:nodeDependencies.addEntry)"
+                "contents": "加载中..."
             }
         ]
     },

@@ -12,7 +12,7 @@ class ViewsContainers {
         //原始数据
         this.treeData = get(this.context);
         //分类
-        this.current = new View(this.treeData, { filter: 'name' });
+        this.current = new View(this.treeData, { filter: [REVIEW, COMPLETED_VIEW, FAVORITE_VIEW] });
         this.review = new View(this.treeData, { filter: REVIEW, group: 'date' });
         this.completed = new View(this.treeData, { filter: COMPLETED_VIEW });
         this.favorite = new View(this.treeData, { filter: FAVORITE_VIEW });

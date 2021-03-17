@@ -17,7 +17,19 @@ class View {
 
     setTreeDataByOptions(data) {
         const { filter, group } = this.options || {};
-        const treeData = data.filter((item) => item[filter]);
+        const treeData = data.filter((item) => {
+            if (filter instanceof Array) {
+                let isCurrent = true;
+                for (let key of filter) {
+                    if (item[key]) {
+                        isCurrent = false;
+                        break;
+                    }
+                }
+                return isCurrent
+            }
+            return item[filter]
+        });
         let list = [];
 
         if (group) {

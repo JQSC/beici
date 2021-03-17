@@ -27,7 +27,7 @@ function activate(context) {
 
     //标记加入收藏
     registerCommand('beici.markFavorite', (treeItem) =>
-        ViewsContainers.back(treeItem, FAVORITE_VIEW)
+        ViewsContainers.addMark(treeItem, FAVORITE_VIEW)
     )
 
 
