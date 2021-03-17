@@ -3,13 +3,14 @@
     "publisher":"csq",
     "displayName": "Beici",
     "description": "摸鱼背单词工具，仿vscode文件列表，让你毫无顾忌，放肆的记单词!",
-    "version": "0.0.1",
+    "version": "0.0.10",
     "engines": {
         "vscode": "^1.54.0"
     },
     "categories": [
         "Other"
     ],
+    "icon": "resources/logo.jpg",
     "activationEvents": [
         "onCommand:beici.markReview",
         "onCommand:beici.markCompleted",
@@ -114,10 +115,15 @@
             }
         ]
     },
+    "repository": {
+		"type": "git",
+		"url": "https://github.com/JQSC/beici"
+	},
     "scripts": {
         "lint": "eslint .",
         "pretest": "npm run lint",
-        "test": "node ./test/runTest.js"
+        "test": "node ./test/runTest.js",
+        "publish": "vsce package"
     },
     "devDependencies": {
         "@types/vscode": "^1.54.0",
