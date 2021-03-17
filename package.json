@@ -29,7 +29,7 @@
             },
             {
                 "command": "beici.markReview",
-                "title": "已学",
+                "title": "复习",
                 "icon": {
                     "light": "resources/light/add.svg",
                     "dark": "resources/dark/add.svg"
@@ -86,7 +86,7 @@
                 },
                 {
                     "id": "beici-review",
-                    "name": "已学单词"
+                    "name": "复习单词"
                 },
                 {
                     "id": "beici-completed",
