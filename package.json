@@ -3,7 +3,7 @@
     "publisher":"csq",
     "displayName": "Beici",
     "description": "摸鱼背单词工具，仿vscode文件列表，让你毫无顾忌，放肆的记单词!",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "engines": {
         "vscode": "^1.54.0"
     },
