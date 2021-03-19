@@ -5,21 +5,13 @@ const CET4_T = require('../assets/CET4_T.json')
 const directoryName = 'globalStorage';
 const fileName = 'CET4_T.json';
 
-function update(context, world) {
+function update(context, treeData) {
 
     const globalStoragePathArr = context.globalStoragePath.split(directoryName);
     const storageDirectory = path.join(globalStoragePathArr[0], directoryName, fileName);
 
-    let json = readFile(storageDirectory);
+    fs.writeFileSync(storageDirectory, JSON.stringify(treeData));
 
-    json.map((item,index) => {
-        if (item.name === world.name) {
-            Object.assign(item, world);
-        }
-        return item;
-    })
-
-    fs.writeFileSync(storageDirectory, JSON.stringify(json));
 }
 
 function readFile(path) {

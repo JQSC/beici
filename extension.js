@@ -16,22 +16,41 @@ function activate(context) {
     registerTreeDataProvider('beici-favorite', ViewsContainers.favorite);
 
     //标记加入已学列表
-    registerCommand('beici.markReview', (treeItem) =>
-        ViewsContainers.addMark(treeItem, REVIEW)
-    )
+    registerCommand('beici.markReview', (treeItem) => {
+        treeItem[REVIEW] = true;
+        return ViewsContainers.addMark(treeItem, REVIEW)
+    })
 
     //标记加入已斩列表
-    registerCommand('beici.markCompleted', (treeItem) =>
-        ViewsContainers.addMark(treeItem, COMPLETED_VIEW)
-    )
+    registerCommand('beici.curreny.markCompleted', (treeItem) => {
+        treeItem[COMPLETED_VIEW] = true;
+        return ViewsContainers.addMark(treeItem, COMPLETED_VIEW)
+    })
+
+    registerCommand('beici.review.markCompleted', (treeItem) => {
+        treeItem[COMPLETED_VIEW] = true;
+        //treeItem[REVIEW] = false;
+        return ViewsContainers.addMark(treeItem, COMPLETED_VIEW)
+    })
 
     //标记加入收藏
-    registerCommand('beici.markFavorite', (treeItem) =>
-        ViewsContainers.addMark(treeItem, FAVORITE_VIEW)
-    )
+    registerCommand('beici.markFavorite', (treeItem) => {
+        treeItem[FAVORITE_VIEW] = true;
+        return ViewsContainers.addMark(treeItem, FAVORITE_VIEW)
+    })
 
+    //取消 markCancel
+    registerCommand('beici.completed.markCancel', (treeItem) => {
 
+        treeItem[COMPLETED_VIEW] = false;
 
+        return ViewsContainers.addMark(treeItem, COMPLETED_VIEW)
+    })
+
+    registerCommand('beici.favorite.markCancel', (treeItem) => {
+        treeItem[FAVORITE_VIEW] = false;
+        return ViewsContainers.addMark(treeItem, FAVORITE_VIEW)
+    })
 
 }
 

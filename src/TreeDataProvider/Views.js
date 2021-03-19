@@ -1,14 +1,14 @@
 const vscode = require('vscode');
-const { update, get } = require('./storage');
-const { CURRENT_VIEW, REVIEW } = require('../constants/viewConstants');
+const { CURRENT_VIEW, REVIEW, COMPLETED_VIEW, FAVORITE_VIEW } = require('../constants/viewConstants');
 const path = require('path');
-const addSvg = path.join(__dirname, '..', '..', 'resources', 'dark', 'add.svg');
+const zhanSvg = path.join(__dirname, '..', '..', 'resources', 'dark', 'zhan.svg');
 
 class View {
 
     constructor(treeData, options) {
         this.changeTreeDataEmitter = new vscode.EventEmitter();
         this.onDidChangeTreeData = this.changeTreeDataEmitter.event;
+        this.type = options.type;
         //options 规则
         this.options = options;
         this.treeData = this.setTreeDataByOptions(treeData)
@@ -55,9 +55,9 @@ class View {
     //获取元素内容
     getTreeItem(element) {
         if (element.children) {
-            return new WordGroup(element);
+            return new WordGroup(element, this.type);
         } else {
-            return new WorldItem(element);
+            return new WorldItem(element, this.type);
         }
     }
 
@@ -98,11 +98,11 @@ class View {
 }
 
 class WorldItem extends vscode.TreeItem {
-    constructor(world) {
+    constructor(world, type) {
         const { name, trans, usphone, ukphone } = world;
         //'[斩] '
         super(name);
-        // this.iconPath = addSvg
+        this.iconPath = (type == REVIEW && world.COMPLETED_VIEW && world.REVIEW) ? zhanSvg : '';
         this.contextValue = 'world';
         this.description = transString(trans);
         this.tooltip = [

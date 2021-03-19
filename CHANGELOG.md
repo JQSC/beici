@@ -1,9 +1,16 @@
-# Change Log
+# 更新记录
 
-All notable changes to the "y" extension will be documented in this file.
+## [v0.0.2] （2021-3-19）
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+### 新增功能
 
-## [Unreleased]
+- 复习列表点击完成后增加[斩]图标
+- 已斩单词和收藏增加取消功能
 
-- Initial release
+### 优化功能
+
+- 更换icon使其看起来与它的功能更加匹配
+
+## [v0.0.1] （2021-3-17）
+
+- 版本上线

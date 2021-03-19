@@ -3,7 +3,7 @@
     "publisher":"csq",
     "displayName": "Beici",
     "description": "摸鱼背单词工具，仿vscode文件列表，让你毫无顾忌，放肆的记单词!",
-    "version": "0.0.10",
+    "version": "0.0.2",
     "engines": {
         "vscode": "^1.54.0"
     },
@@ -13,9 +13,15 @@
     "icon": "resources/logo.jpg",
     "activationEvents": [
         "onCommand:beici.markReview",
-        "onCommand:beici.markCompleted",
+        
         "onCommand:beici.markFavorite",
         "onCommand:beici.sort",
+
+        "onCommand:beici.curreny.markCompleted",
+        "onCommand:beici.review.markCompleted",
+        
+        "onCommand:beici.completed.markCancel",
+        "onCommand:beici.favorite.markCancel",
         "onView:beici-curreny",
         "onView:beici-review",
         "onView:beici-completed",
@@ -32,24 +38,48 @@
                 "command": "beici.markReview",
                 "title": "复习",
                 "icon": {
-                    "light": "resources/light/add.svg",
-                    "dark": "resources/dark/add.svg"
+                    "light": "resources/light/ok.svg",
+                    "dark": "resources/dark/ok.svg"
                 }
             },
             {
                 "command": "beici.markFavorite",
                 "title": "收藏",
                 "icon": {
-                    "light": "resources/light/like.svg",
-                    "dark": "resources/dark/like.svg"
+                    "light": "resources/light/love.svg",
+                    "dark": "resources/dark/love.svg"
                 }
             },
             {
-                "command": "beici.markCompleted",
+                "command": "beici.completed.markCancel",
+                "title": "取消",
+                "icon": {
+                    "light": "resources/light/cancel.svg",
+                    "dark": "resources/dark/cancel.svg"
+                }
+            },
+            {
+                "command": "beici.favorite.markCancel",
+                "title": "取消",
+                "icon": {
+                    "light": "resources/light/cancel.svg",
+                    "dark": "resources/dark/cancel.svg"
+                }
+            },
+            {
+                "command": "beici.curreny.markCompleted",
                 "title": "斩",
                 "icon": {
-                    "light": "resources/light/ok.svg",
-                    "dark": "resources/dark/ok.svg"
+                    "light": "resources/light/zhan.svg",
+                    "dark": "resources/dark/zhan.svg"
+                }
+            },
+            {
+                "command": "beici.review.markCompleted",
+                "title": "斩",
+                "icon": {
+                    "light": "resources/light/zhan.svg",
+                    "dark": "resources/dark/zhan.svg"
                 }
             }
         ],
@@ -68,13 +98,28 @@
                     "group": "inline"
                 },
                 {
-                    "command": "beici.markCompleted",
+                    "command": "beici.markFavorite",
                     "when": "view =~ /beici-curreny|beici-review/ && viewItem == world",
                     "group": "inline"
                 },
                 {
-                    "command": "beici.markFavorite",
-                    "when": "view =~ /beici-curreny|beici-review|beici-completed/ && viewItem == world",
+                    "command": "beici.curreny.markCompleted",
+                    "when": "view =~ /beici-curreny/ && viewItem == world",
+                    "group": "inline"
+                },
+                {
+                    "command": "beici.review.markCompleted",
+                    "when": "view =~ /beici-review/ && viewItem == world",
+                    "group": "inline"
+                },
+                {
+                    "command": "beici.completed.markCancel",
+                    "when": "view =~ /beici-completed/ && viewItem == world",
+                    "group": "inline"
+                },
+                {
+                    "command": "beici.favorite.markCancel",
+                    "when": "view =~ /beici-favorite/ && viewItem == world",
                     "group": "inline"
                 }
             ]
@@ -111,7 +156,7 @@
         "viewsWelcome": [
             {
                 "view": "beici-curreny",
-                "contents": "加载中..."
+                "contents": "Loading..."
             }
         ]
     },
