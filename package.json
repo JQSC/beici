@@ -10,6 +10,14 @@
     "categories": [
         "Other"
     ],
+    "keywords": [
+        "摸鱼",
+        "英语",
+        "英語",
+        "单词",
+        "四级",
+        "yingyu"
+    ],
     "icon": "resources/logo.jpg",
     "activationEvents": [
         "onCommand:beici.markReview",
@@ -148,7 +156,7 @@
             "activitybar": [
                 {
                     "id": "beici-explorer",
-                    "title": "Beici",
+                    "title": "Beici CET-4",
                     "icon": "resources/english.svg"
                 }
             ]
